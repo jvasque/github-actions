@@ -1,1 +1,23 @@
+name: Ejemplo de Flujo de Trabajo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ejecutar-index-js:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v2
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'  
+
+    - name: Ejecutar archivo index.js
+      run: node index.js
 
