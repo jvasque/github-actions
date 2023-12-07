@@ -1,0 +1,28 @@
+on: 
+  workflow_run:
+    workflows: [Ejemplo de Flujo de Trabajo]
+    types: in_progress
+jobs:
+  pr_commented:
+    # This job only runs for pull request comments
+    name: PR comment
+    if: ${{ github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo A comment on PR $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
+
+  issue_commented:
+    # This job only runs for issue comments
+    name: Issue comment
+    if: ${{ !github.event.issue.pull_request }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo A comment on issue $NUMBER
+
+  
+        env:
+          NUMBER: ${{ github.event.issue.number }}
